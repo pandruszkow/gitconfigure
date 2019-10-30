@@ -1,0 +1,171 @@
+[include]
+        #This .gitconfig is designed to be in use across multiple machines and/or user accounts, each of which will have different private config that shouldn't be shared with other machines/user accounts. 
+	#.gitconfig.local captures this private config and keeps it out of the way of version control (including getting picked up and/or overwritten by it)
+	#Settings which you may want to keep there include user.name, user.email, credentials and HTTP(S) proxy settings
+	path = .gitconfig.local
+
+[core]
+	#git is now a bit less excruciatingly slow on Windows - part 1
+	preloadindex = true
+	fscache = true
+	
+	#Automatically kill CRLF and convert it to the Only True Line Ending (tm) - LF-only.
+	autocrlf = false
+	eol = lf
+	
+[gc]
+	#git is now a bit less excruciatingly slow on Windows - part 2
+	auto = 256
+
+[credential]
+	# cache HTTPS credentials for a month to avoid having to re-type them
+	helper = cached --timeout 2628000
+
+[alias]
+	#(difference in semantics: co is for switching branches, ch is for checking out a remote branch for the first time)
+	#Arguably can be a bit pointless. I only mostly use "co" on a daily basis, anyway.
+	co = checkout
+	ch = checkout
+	
+	#status abbrev.
+	s = !git log -1 && echo && echo && git status
+	st = !git s
+	sta = !git s
+	
+	#Amend commit, use current commit's commit message as the amended commit message
+	amend = commit --amend -C HEAD
+	
+	#git add abbrev.
+	a = add
+	aa = add -A
+	
+	#Reset hard/soft to any commit
+	hardreset = reset --hard
+	softreset = reset --soft
+	#Reset hard/soft to the previous HEAD commit
+	hardchop = reset --hard HEAD^
+	softchop = reset --soft HEAD^
+	
+#ideas originally from an Atlassian blog, but this guy had a better execution of the idea:
+#http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/ (thanks!)
+	#list commits by commit message, commit hash and branch/tag if attached to a commit
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+	#same thing as above, except it breaks down each commit to also show which files changed and 
+	#what the diff statistics are (no. of lines changed, etc)
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	#list all aliases that git is currently running with
+	aliases = !git config -l | grep alias | cut -c 7-
+	#quickly edit the global .gitconfig file using default editor
+	global = config --global -e
+	
+#ideas below inspired by http://gggritso.com/human-git-aliases (thanks!)
+	
+	#remove file changes for particular file(s) from the staging area
+	unstage = reset -q HEAD -- 
+	r = !git unstage
+	
+	#git branch abbrev.
+	br = branch
+	#quickly rename a branch
+	brename = branch --move
+	#ruthlessly remove a branch that isn't going to be used locally any more
+	kill = branch -D
+	
+	#discard file changes for particular file(s) which are not staged
+	#note: this will not have any effect unless the file is `unstage`d first.
+	discard = checkout --
+	#undo the most recent `git commit` operation and put all recent changes back into staging area
+	uncommit = reset --mixed HEAD~	
+	
+	#purge any file changes (in the repo?) which are not staged, as well as any
+	#stray files that aren't being tracked by git (incl. output directories and the like)
+	discardall = !git checkout -- . && git clean -fd
+	#the nuke option - hard-reset to the HEAD commit, discard anything that wasn't a part of it.
+	#useful for clearing a repo to a known-good state if things went really wrong
+	#with git troubleshooting
+	nvm = !git reset --hard HEAD && git clean -fd
+	
+#From a post by Conrad Parker! (http://blog.kfish.org/2010/04/git-lola.html) (thanks!)
+	# Note: this is adapted, since the original alias of this command is `lola`.
+	# I decided that listing it under `lol` will be more productive. I don't think that
+	# I'll often need the `--all`-less variant, and the one with '--all' looks a bit 
+	# better visually too, somehow. I might update this if I find a good reason to do so.
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit --all
+
+#Everything below this comment is more or less my idea to automate tedious, frequently-run commands
+	
+	#Diff commands. Note that they work if `--cached` is appended if you want to diff only against
+	#staged file changes rather than current state of physical files. Whitespace differences are ignored.
+	#Differences from the HEAD commit of the branch
+	dhead = diff -w HEAD
+	#Differences from the `master` branch / whatever branch is your upstream
+	dmaster = diff -w origin/"master"
+	#Differences from the previous-to-latest commit of the branch.
+	#I use this when `git commit` was just run, and I want to check what changed since the commit that used
+	#to be the HEAD commit until a moment ago
+	dlast = diff -w HEAD^
+	
+	#Alias for a "safer" version of `git stash pop`, one that is short to type and cannot discard code
+	#irrevocably if something goes wrong (the stash still keeps the bundle of changes 
+	#that's being applied)
+	pop = stash apply
+
+	#showfiles/showfile -> show list of files changed by last commit
+	showfile = !echo "Not implemented"
+	showfiles = !git showfile
+
+	#switch to current master branch
+	master = checkout "master"
+	#switch to current dev branch (inactive)
+	#dev = checkout "develop"
+
+#The ones below are also my idea, but a bit... unorthodox, I guess? Read on to discover why.
+
+	#My workflow is generally the following:
+	#1. Produce changes until satisfied with them.
+	#2. Add all and commit/amend commit
+	#3. Update origin/"master" and rebase/merge the current branch against that
+	#4. `git push --force` against the remote feature branch. Unexpected remote changes just get overwritten.
+	#   A feature is assumed to be only ever assigned to one developer only, so it makes sense that
+	#   each feature branch on git is for one developer's exclusive use only, unless agreed otherwise
+	#   with another developer.
+	
+	#This generally has two dangers in terms of data loss:
+	#1. Another developer uploads code to your branch, your `push --force` overwrites it.
+	#   This is arguably not your fault. Putting fingers into a running blender is not a good idea either.
+	#   Git branches are free. If you want to keep it, put it in a branch and push it into a remote.
+	#   As long as everybody understands this assumption, we should be clear.
+	#2. You accidentally `push --force` into the "master" branch. Oops.
+	#   The aliases below are designed to abort the push if the branch name looks like a "master" branch,
+	#   precisely to prevent this scenario.
+	
+	#forcepush / upsync / upsub: check if branch is a master (name contains string 'master') or other 
+	#protected branch. Abort if yes, push --force upstream if no.
+	
+	#Forcepush and upsync are technically identical, but I keep them semantically different because
+	#I'm using them for two distinct purposes. They both ring the terminal bell to indicate completion,
+	#as a push operation may take a while.
+	
+	#A forcepush is meant to represent a forceful, 'I don't care' push into the remote branch, without regard
+	#for what's already there, whether it's mine or not. The intended use is to to initiate a remote branch 
+	#that mirrors whatever branch is checked out locally at the moment, and to unbreak a remote's history.
+	forcepush = !__alias_BRANCH="$(git rev-parse --abbrev-ref HEAD)" && echo "Trying to force-push to branch $__alias_BRANCH" && [ ! $(echo $__alias_BRANCH | grep "master") ] && git push --force origin "$__alias_BRANCH" && echo "Force-push successful." && tput bel
+	
+	#An upsync is meant to represent a push into a remote branch that is supposed to be exclusively writable to me.
+	#It corresponds to step 3 of my workflow.
+	#The "force" aspect of the `push --force` is purely a technical formality that comes out of being unable to
+	#continue where the remote branch left off, if you are continuously rebasing against the "master" branch.
+	upsync = !git forcepush
+	upsub = !git forcepush #guess where the reference for this one comes from :)
+	
+	#A downsync is an operation that ensures your local branch is in sync with whatever the upstream
+	#"master" branch is, so that you can resolve any merge/rebase conflicts that may occur due to somebody
+	#else changing the same pieces of code that you have.
+	#Note 1: I prefer a rebase for now, but may switch to merge later on if I decide to do so.
+	#Note 2: Fetch && rebase avoids having to switch branches twice (previous version of this script).
+	#        This was really slow on Git Bash for Windows, so I managed to optimise that away.
+	downsync = !git fetch origin && git rebase origin/"master"
+	
+	#Abbreviations for the above workflow aliases
+	up = !git upsync
+	down = !git downsync

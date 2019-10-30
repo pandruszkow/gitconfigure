@@ -1,0 +1,10 @@
+[user]
+	name = Full Name Goes here
+	email = you@example.com
+
+#Use git on a corporate proxy that blocks HTTP/HTTPS access unless you use it
+[http]
+	proxy = http://username:password@proxy-url.example.com:PORTNUMBER
+
+[https]
+	proxy = http://username:password@proxy-url.example.com:PORTNUMBER
