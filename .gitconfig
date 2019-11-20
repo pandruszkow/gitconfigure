@@ -74,9 +74,16 @@
 	br = branch
 	#quickly rename a branch
 	brename = branch --move
-	#ruthlessly remove a branch that isn't going to be used locally any more
+	#kill a branch that has outlived its usefulness
+	#only the local branch
 	kill = branch -D
-	
+	#only the remote branch
+	rkill = push origin --delete
+	#Kill BRanch
+	kbr = branch -D	
+	#Remote Kill BRanch
+	rkbr = push origin --delete
+
 #todo: this really should be a separate, shell-based git command like "branch" (to override the original one) with reasonable parameters, parsing and autocomplete(!). Otherwise it requires too much mental mode-switching for new users and occasionally for myself.
 
 	#discard file changes for particular file(s) which are not staged
