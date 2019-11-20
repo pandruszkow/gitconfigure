@@ -77,6 +77,8 @@
 	#ruthlessly remove a branch that isn't going to be used locally any more
 	kill = branch -D
 	
+#todo: this really should be a separate, shell-based git command like "branch" (to override the original one) with reasonable parameters, parsing and autocomplete(!). Otherwise it requires too much mental mode-switching for new users and occasionally for myself.
+
 	#discard file changes for particular file(s) which are not staged
 	#note: this will not have any effect unless the file is `unstage`d first.
 	discard = checkout --
@@ -147,6 +149,9 @@
 	
 	#forcepush / upsync / upsub: check if branch is a master (name contains string 'master') or other 
 	#protected branch. Abort if yes, push --force upstream if no.
+	
+#TODO: Refactor this monstrosity into proper Bash/shell/Perl/python scripts. Inline shell is not a good fit for this.
+#TODO: Refactor this so that there's such a terminological concept as a per-branch "upstream". This is (respectively) a master, dev, or feature branch that you're currently focused on periodically rebasing against. Right now the code hardcodes a single convention-based string, and that's bad. You should be able to reconfigure this per-branch, or per-repo.
 	
 	#Forcepush and upsync are technically identical, but I keep them semantically different because
 	#I'm using them for two distinct purposes. They both ring the terminal bell to indicate completion,
