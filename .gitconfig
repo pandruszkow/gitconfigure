@@ -44,6 +44,7 @@
 	#git add abbrev.
 	a = add
 	aa = add -A
+	aaa = add -p
 	
 	#Reset hard/soft to any commit
 	hardreset = reset --hard
