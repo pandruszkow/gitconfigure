@@ -10,6 +10,10 @@
 	#the below might be a no-op
 	indentHeuristic = true
 
+[push]
+	#on git push, push the current branch to a remote branch of the same name on the remote. If the remote has no branch whose name matches the name of the current branch, create it.
+	default = current
+
 [core]
 	#git is now a bit less excruciatingly slow on Windows - part 1
 	preloadindex = true
