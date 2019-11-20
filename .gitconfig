@@ -28,6 +28,8 @@
 	helper = cached --timeout 2628000
 
 [alias]
+	whichbranch = rev-parse --abbrev-ref HEAD
+
 	#(difference in semantics: co is for switching branches, ch is for checking out a remote branch for the first time)
 	#Arguably can be a bit pointless. I only mostly use "co" on a daily basis, anyway.
 	co = checkout
