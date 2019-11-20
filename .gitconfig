@@ -4,6 +4,12 @@
 	#Settings which you may want to keep there include user.name, user.email, credentials and HTTP(S) proxy settings
 	path = .gitconfig.local
 
+[diff]
+	#we don't have crazy-large files, so "smart" algorithms that take longer are a reasonable tradeoff
+	algorithm = histogram
+	#the below might be a no-op
+	indentHeuristic = true
+
 [core]
 	#git is now a bit less excruciatingly slow on Windows - part 1
 	preloadindex = true
