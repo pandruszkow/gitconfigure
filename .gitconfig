@@ -32,6 +32,7 @@
 	helper = cached --timeout 2628000
 
 [alias]
+	#For scripts (reserved for future use)
 	whichbranch = rev-parse --abbrev-ref HEAD
 
 	#(difference in semantics: co is for switching branches, ch is for checking out a remote branch for the first time)
