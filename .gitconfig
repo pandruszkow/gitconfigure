@@ -163,25 +163,11 @@
 	
 	#forcepush / upsync / upsub: check if branch is a master (name contains string 'master') or other 
 	#protected branch. Abort if yes, push --force upstream if no.
+
+#26112019 - commented this out. The stock git push --force suffices with the new default of target branch names. The `master`/`dev` branch molly-guard will be def. very useful, but this will have to be implemented within a bash script rather than this one-liner, or as a post-push(?) git hook in the repo.
 	
 #TODO: Refactor this monstrosity into proper Bash/shell/Perl/python scripts. Inline shell is not a good fit for this.
 #TODO: Refactor this so that there's such a terminological concept as a per-branch "upstream". This is (respectively) a master, dev, or feature branch that you're currently focused on periodically rebasing against. Right now the code hardcodes a single convention-based string, and that's bad. You should be able to reconfigure this per-branch, or per-repo.
-	
-	#Forcepush and upsync are technically identical, but I keep them semantically different because
-	#I'm using them for two distinct purposes. They both ring the terminal bell to indicate completion,
-	#as a push operation may take a while.
-	
-	#A forcepush is meant to represent a forceful, 'I don't care' push into the remote branch, without regard
-	#for what's already there, whether it's mine or not. The intended use is to to initiate a remote branch 
-	#that mirrors whatever branch is checked out locally at the moment, and to unbreak a remote's history.
-	forcepush = !__alias_BRANCH="$(git rev-parse --abbrev-ref HEAD)" && echo "Trying to force-push to branch $__alias_BRANCH" && [ ! $(echo $__alias_BRANCH | grep "master") ] && git push --force origin "$__alias_BRANCH" && echo "Force-push successful." && tput bel
-	
-	#An upsync is meant to represent a push into a remote branch that is supposed to be exclusively writable to me.
-	#It corresponds to step 3 of my workflow.
-	#The "force" aspect of the `push --force` is purely a technical formality that comes out of being unable to
-	#continue where the remote branch left off, if you are continuously rebasing against the "master" branch.
-	upsync = !git forcepush
-	upsub = !git forcepush #guess where the reference for this one comes from :)
 	
 	#A downsync is an operation that ensures your local branch is in sync with whatever the upstream
 	#"master" branch is, so that you can resolve any merge/rebase conflicts that may occur due to somebody
@@ -190,7 +176,3 @@
 	#Note 2: Fetch && rebase avoids having to switch branches twice (previous version of this script).
 	#        This was really slow on Git Bash for Windows, so I managed to optimise that away.
 	downsync = !git fetch origin && git rebase origin/"master"
-	
-	#Abbreviations for the above workflow aliases
-	up = !git upsync
-	down = !git downsync
