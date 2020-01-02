@@ -130,6 +130,7 @@
 	
 	#A human alias for a `reverse stash` operation: dumping all the changes in the stash but keeping them there in case a merge conflict shows up so that I can use a `reset` operation easily and not lose data.
 	unstash = stash apply
+	wip = commit -m "wip"
 
 	#showfiles/showfile -> show list of files changed by last commit
 	showfile = !echo "Not implemented"
