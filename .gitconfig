@@ -127,10 +127,8 @@
 	#to be the HEAD commit until a moment ago
 	dlast = diff -w HEAD^
 	
-	#Alias for a "safer" version of `git stash pop`, one that is short to type and cannot discard code
-	#irrevocably if something goes wrong (the stash still keeps the bundle of changes 
-	#that's being applied)
-	pop = stash apply
+	#A human alias for a `reverse stash` operation: dumping all the changes in the stash but keeping them there in case a merge conflict shows up so that I can use a `reset` operation easily and not lose data.
+	unstash = stash apply
 
 	#showfiles/showfile -> show list of files changed by last commit
 	showfile = !echo "Not implemented"
