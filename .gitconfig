@@ -10,6 +10,15 @@
 	#the below might be a no-op
 	indentHeuristic = true
 
+[color]
+	diff = auto
+
+[color "diff"]
+	meta = blue bold
+	frag = magenta bold
+	old = red
+	new = green
+
 [push]
 	#on git push, push the current branch to a remote branch of the same name on the remote. If the remote has no branch whose name matches the name of the current branch, create it.
 	default = current
