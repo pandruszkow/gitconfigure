@@ -116,7 +116,7 @@
 	# I decided that listing it under `lol` will be more productive. I don't think that
 	# I'll often need the `--all`-less variant, and the one with '--all' looks a bit 
 	# better visually too, somehow. I might update this if I find a good reason to do so.
-	lol = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	lol = log --graph --pretty=oneline --abbrev-commit --max-count 22 --all ^origin/REDACTED_BRANCH_1
 
 #Everything below this comment is more or less my idea to automate tedious, frequently-run commands
 	
