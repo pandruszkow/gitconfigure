@@ -71,6 +71,9 @@
 	aliases = !git config -l | grep alias | cut -c 7-
 	#quickly edit the global .gitconfig file using default editor
 	global = config --global -e
+
+	#prune origin/* branches that no longer have a corresponding remote branch
+	pruneremote = fetch -p
 	
 #ideas below inspired by http://gggritso.com/human-git-aliases (thanks!)
 	
