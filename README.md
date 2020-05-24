@@ -5,6 +5,6 @@ Portable Gitconfigure setup. Sensible aliases and Windows support. Not good enou
 
 ## Installation instructions
 1. Install Git
-1. `mkdir -p ~/.config/gitconfigure`
+1. Check out this repository somewhere
 1. Rename `.gitconfig.local.new` to `.gitconfig.local`
 1. Edit contents of `.gitconfig.local` to reflect your Git identity. This file is added to .gitignore so that your local details will not be a part of any subsequent changes you may want to make to your `.gitconfig`.
