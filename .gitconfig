@@ -38,7 +38,7 @@
 
 [credential]
 	# cache HTTPS credentials for a month to avoid having to re-type them
-	helper = cached --timeout 2628000
+	helper = cache --timeout 2628000
 
 [alias]
 	#For scripts (reserved for future use)
