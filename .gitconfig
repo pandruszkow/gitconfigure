@@ -56,6 +56,9 @@
 	
 	#Amend commit, use current commit's commit message as the amended commit message
 	amend = commit --amend -C HEAD
+	uncommit = reset --soft HEAD^
+	#Amend, changing the commit message only
+	msg = commit --amend
 	
 	#git add abbrev.
 	a = add
@@ -68,6 +71,9 @@
 	#Reset hard/soft to the previous HEAD commit
 	hardchop = reset --hard HEAD^
 	softchop = reset --soft HEAD^
+	#Effectively a rebase where the current commit becomes a fixup to the previous commit
+	fixup = !git softchop && git amend
+	collapse = !git softchop && git amend
 	
 #ideas originally from an Atlassian blog, but this guy had a better execution of the idea:
 #http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/ (thanks!)
