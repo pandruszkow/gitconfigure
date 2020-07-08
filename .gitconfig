@@ -132,13 +132,16 @@
 	#Diff commands. Note that they work if `--cached` is appended if you want to diff only against
 	#staged file changes rather than current state of physical files. Whitespace differences are ignored.
 	#Differences from the HEAD commit of the branch
-	dhead = diff -w HEAD
+#	dhead = diff -w HEAD
+	dhead = diff HEAD
 	#Differences from the `master` branch / whatever branch is your upstream
-	dmaster = diff -w origin/"master"
+#	dmaster = diff -w origin/"master"
+	dmaster = diff origin/"master"
 	#Differences from the previous-to-latest commit of the branch.
 	#I use this when `git commit` was just run, and I want to check what changed since the commit that used
 	#to be the HEAD commit until a moment ago
-	dlast = diff -w HEAD^
+#	dlast = diff -w HEAD^
+	dlast = diff HEAD^
 	
 	#A human alias for a `reverse stash` operation: dumping all the changes in the stash but keeping them there in case a merge conflict shows up so that I can use a `reset` operation easily and not lose data.
 	unstash = stash apply
