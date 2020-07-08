@@ -76,6 +76,7 @@
 	#same thing as above, except it breaks down each commit to also show which files changed and 
 	#what the diff statistics are (no. of lines changed, etc)
 	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat  --invert-grep --author='jenkins'
+	l = log --invert-grep --author='jenkins'
 	#list all aliases that git is currently running with
 	aliases = !git config -l | grep alias | cut -c 7- | sort
 	#quickly edit the global .gitconfig file using default editor
