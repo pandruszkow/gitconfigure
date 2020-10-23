@@ -12,6 +12,8 @@
 
 [color]
 	diff = auto
+	#IDK what I was trying to achieve with the below
+	ui = true
 
 [color "diff"]
 	#Change the colour palette to something bolder. The meanings are more clear-cut and obvious (red=remove, green=add) than the insipid default palette.
@@ -50,8 +52,8 @@
 	co = checkout
 	ch = checkout
 	
-	#status abbrev.
-	s = !git log -1 && echo && echo && git status
+	#status abbrev. "No pager" is specified so that the display is seemless.
+	s = !git --no-pager log -1 && echo && echo && git status
 	st = !git s
 	sta = !git s
 	
@@ -82,11 +84,11 @@
 #ideas originally from an Atlassian blog, but this guy had a better execution of the idea:
 #http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/ (thanks!)
 	#list commits by commit message, commit hash and branch/tag if attached to a commit
-	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate  --invert-grep --author='jenkins'
+	ls = log --no-pager --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate  --invert-grep --author='jenkins'
 	#same thing as above, except it breaks down each commit to also show which files changed and 
 	#what the diff statistics are (no. of lines changed, etc)
-	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat  --invert-grep --author='jenkins'
-	l = log --invert-grep --author='jenkins'
+	ll = log --no-pager --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat  --invert-grep --author='jenkins'
+	l = log --no-pager --invert-grep --author='jenkins'
 	#list all aliases that git is currently running with
 	aliases = !git config -l | grep alias | cut -c 7- | sort
 	#quickly edit the global .gitconfig file using default editor
@@ -136,7 +138,7 @@
 	# I decided that listing it under `lol` will be more productive. I don't think that
 	# I'll often need the `--all`-less variant, and the one with '--all' looks a bit 
 	# better visually too, somehow. I might update this if I find a good reason to do so.
-	lol = log --graph --pretty=oneline --abbrev-commit --max-count 50 --all --invert-grep --author='jenkins'
+	lol = log --graph --pretty=oneline --abbrev-commit --all --invert-grep --author='jenkins'
 # ^origin/REDACTED_BRANCH_1 ^origin/REDACTED_BRANCH_2
 
 #Everything below this comment is more or less my idea to automate tedious, frequently-run commands
