@@ -59,6 +59,8 @@
 	uncommit = reset --soft HEAD^
 	#Amend, changing the commit message only
 	msg = commit --amend
+	edmsg = commit --amend
+	editmsg = commit --amend
 	
 	#git add abbrev.
 	a = add
@@ -164,8 +166,8 @@
 
 	#switch to current master branch
 	master = checkout "master"
-	#switch to current dev branch (inactive)
-	#dev = checkout "develop"
+	#switch to current dev branch
+	develop = checkout "develop"
 
 #The ones below are also my idea, but a bit... unorthodox, I guess? Read on to discover why.
 
