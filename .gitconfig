@@ -77,6 +77,7 @@
 	#Effectively a rebase where the current commit becomes a fixup to the previous commit
 	fixup = !git softchop && git amend
 	collapse = !git softchop && git amend
+	squish = !git softchop && git amend
 	
 #ideas originally from an Atlassian blog, but this guy had a better execution of the idea:
 #http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/ (thanks!)
