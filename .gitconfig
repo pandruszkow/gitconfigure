@@ -14,6 +14,7 @@
 	diff = auto
 
 [color "diff"]
+	#Change the colour palette to something bolder. The meanings are more clear-cut and obvious (red=remove, green=add) than the insipid default palette.
 	meta = blue bold
 	frag = magenta bold
 	old = red
