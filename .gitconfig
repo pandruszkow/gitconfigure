@@ -166,6 +166,11 @@
 	showfile = !echo "Not implemented"
 	showfiles = !git showfile
 
+	#print just the unindented git commit message in full, nothing else (i.e. the "headline" of the commit, followed by the rest of the commit message body).
+	#Meant for copying-and-pasting into MR description fields or whatever.
+	printmsg = show -s --format=%s%n%n%b
+	showmsg = show -s --format=%s%n%n%b
+
 	#switch to current master branch
 	#todo: have a custom file in .git/info that has a blocklist for these. So e.g. if a project's master branch is not in use usually, there should be a message "not switching branch to master, branch is not in general use"
 	#todo: might have an auto-switcher if no other operation is specified, e.g. `git PROJECTB-9119` should switch to a branch named `PROJECTB-9119` if it exists and if a different command doesn't already alias it.
