@@ -12,7 +12,7 @@
 
 [color]
 	diff = auto
-	#IDK what I was trying to achieve with the below
+	#IDK what I was trying to achieve with the below - edit 2021-08-23: I think this is to force a colour output on things like diffs when piping them to `less` and `grep`, since I still want to view the output colourised.
 	ui = true
 
 [color "diff"]
@@ -112,10 +112,6 @@
 	kill = branch -D
 	#only the remote branch
 	rkill = push origin --delete
-	#Kill BRanch
-	kbr = branch -D	
-	#Remote Kill BRanch
-	rkbr = push origin --delete
 
 #todo: this really should be a separate, shell-based git command like "branch" (to override the original one) with reasonable parameters, parsing and autocomplete(!). Otherwise it requires too much mental mode-switching for new users and occasionally for myself.
 
