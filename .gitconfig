@@ -172,6 +172,7 @@
 	#switch to current master branch
 	#todo: have a custom file in .git/info that has a blocklist for these. So e.g. if a project's master branch is not in use usually, there should be a message "not switching branch to master, branch is not in general use"
 	#todo: might have an auto-switcher if no other operation is specified, e.g. `git PROJECTB-9119` should switch to a branch named `PROJECTB-9119` if it exists and if a different command doesn't already alias it.
+	#this would likely have to be done with the upcoming shell command wrapper
 	master = checkout "master"
 	#switch to current dev branch
 	develop = checkout "develop"
