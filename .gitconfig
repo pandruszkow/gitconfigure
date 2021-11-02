@@ -212,3 +212,5 @@
 	#Note 2: Fetch && rebase avoids having to switch branches twice (previous version of this script).
 	#        This was really slow on Git Bash for Windows, so I managed to optimise that away.
 	downsync = !git fetch origin && git rebase origin/"master"
+#	ignore = !echo $1 | tee -a $GIT_PREFIX/.gitignore
+	ignore = "!f() { echo $1 >> \"${GIT_PREFIX}.gitignore\"; }; f"
