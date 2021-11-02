@@ -83,12 +83,13 @@
 	
 #ideas originally from an Atlassian blog, but this guy had a better execution of the idea:
 #http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/ (thanks!)
+#Todo: integrate --no-pager into this somehow. Shell escaping makes this difficult.
 	#list commits by commit message, commit hash and branch/tag if attached to a commit
-	ls = log --no-pager --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate  --invert-grep --author='jenkins'
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate  --invert-grep --author='jenkins'
 	#same thing as above, except it breaks down each commit to also show which files changed and 
 	#what the diff statistics are (no. of lines changed, etc)
-	ll = log --no-pager --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat  --invert-grep --author='jenkins'
-	l = log --no-pager --invert-grep --author='jenkins'
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate  --numstat --invert-grep --author='jenkins'
+	l = log --invert-grep --author='jenkins'
 	#list all aliases that git is currently running with
 	aliases = !git config -l | grep alias | cut -c 7- | sort
 	#quickly edit the global .gitconfig file using default editor
