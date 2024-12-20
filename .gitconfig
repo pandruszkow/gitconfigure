@@ -160,6 +160,11 @@
 	#Put all the changes into a WIP commit, and then unput them from the commit into staging, soft-removing the commit
 	wip = commit -m "wip"
 	unwip = !git softchop
+	
+	#Just check in absolutely everything in the repo as-is with a minimum formality version control call based on timestamps
+	checkpoint = !git add -A && git commit -m "Checkpoint"
+	ckpt = !git checkpoint
+	ck = !git checkpoint
 
 	#showfiles/showfile -> show list of files changed by last commit
 	showfile = !echo "Not implemented"
