@@ -9,7 +9,7 @@ mkdir -p ~/.local/share/gitconfigure && \
 cd .local/share/gitconfigure && \
 git clone git@github.com:pandruszkow/gitconfigure.git . && \
 ./install.sh && \
-echo "Installation done for .gitconfigure on $(date -I)"
+echo "Installation done for .gitconfigure on $(date -Iseconds)"
 ```
 
 ## Installation instructions (manual)
