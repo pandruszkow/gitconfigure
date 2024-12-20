@@ -3,7 +3,16 @@
 # gitconfigure
 Portable Gitconfigure setup. Sensible aliases and Windows support. Not good enough autocompletion support yet.
 
-## Installation instructions
+## Installation instructions (fully automatic)
+```sh
+mkdir -p ~/.local/share/gitconfigure && \
+cd .local/share/gitconfigure && \
+git clone git@github.com:pandruszkow/gitconfigure.git . && \
+./install.sh && \
+echo "Installation done for .gitconfigure on $(date -I)"
+```
+
+## Installation instructions (manual)
 1. Install Git
 1. Check out this repository to `.local/share/gitconfig` and `cd` to that
 1. Run `./install.sh`
