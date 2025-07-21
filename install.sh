@@ -18,6 +18,7 @@ fi
 
 
 #Force-copy the machine-specific config (overwrites existing)
+#POSIX does not specify --force, so we have to use -f instead (for example, on Mac OS)
 cp -f .gitconfig.local.new ~/.gitconfig.local
 
 #Open nano to let user edit machine-specific config
