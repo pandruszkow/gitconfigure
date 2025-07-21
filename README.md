@@ -1,7 +1,7 @@
 ![Creative Commons CC-0 v1.0 license logo (small)](https://licensebuttons.net/p/zero/1.0/80x15.png)
 
 # gitconfigure
-Portable Gitconfigure setup. Sensible aliases and Windows support. Not good enough autocompletion support yet.
+Portable Gitconfigure setup. Sensible aliases and Linux/Windows/Mac support. Not good enough autocompletion support yet.
 
 ## Installation instructions (fully automatic)
 **MAKE SURE YOU GENERATE AN SSH KEY ON THE NEW MACHINE AND [ADD IT TO GITHUB SETTINGS](https://github.com/settings/ssh/new)
