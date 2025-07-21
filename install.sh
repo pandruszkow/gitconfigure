@@ -18,7 +18,7 @@ fi
 
 
 #Force-copy the machine-specific config (overwrites existing)
-cp --force .gitconfig.local.new ~/.gitconfig.local
+cp -f .gitconfig.local.new ~/.gitconfig.local
 
 #Open nano to let user edit machine-specific config
 nano ~/.gitconfig.local
