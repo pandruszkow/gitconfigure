@@ -9,7 +9,7 @@ Portable Gitconfigure setup. Sensible aliases and Linux/Windows/Mac support. Not
 ```sh
 mkdir -p ~/.local/share/gitconfigure && \
 cd .local/share/gitconfigure && \
-git clone git@github.com:pandruszkow/gitconfigure.git . && \
+git clone https://github.com/pandruszkow/gitconfigure.git . && \
 ./install.sh && \
 echo "Installation done for .gitconfigure on $(date -Iseconds)"
 ```
